@@ -13,7 +13,7 @@ class IteratorFile(io.TextIOBase):
 
         try:
             while self._f.tell() < length:
-                self._f.write(next(self._it))
+                self._f.write(next(self._it) + "\n")
 
         finally:
             self._f.seek(0)
