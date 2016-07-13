@@ -2,7 +2,7 @@ import io
 import sys
 
 class IteratorFile(io.TextIOBase):
-    """ given an iterator which yields strings
+    """ given an iterator which yields strings,
     return a file like object for reading those strings """
 
     def __init__(self, it):
@@ -14,6 +14,11 @@ class IteratorFile(io.TextIOBase):
         try:
             while self._f.tell() < length:
                 self._f.write(next(self._it) + "\n")
+                
+        except StopIteration as e:
+            # soak up StopIteration. this block is not necessary because
+            # of finally, but just to be explicit
+            pass
 
         finally:
             self._f.seek(0)
