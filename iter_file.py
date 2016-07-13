@@ -20,6 +20,9 @@ class IteratorFile(io.TextIOBase):
             # of finally, but just to be explicit
             pass
 
+        except Exception as e:
+            print("uncaught exception: {}".format(e))
+            
         finally:
             self._f.seek(0)
             data = self._f.read(length)
